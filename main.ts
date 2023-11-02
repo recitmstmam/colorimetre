@@ -5,16 +5,42 @@ input.onButtonPressed(Button.A, function () {
     Debut = 2
 })
 // En appuyant sur B, on fait la mise à zéro du programme.
-input.onButtonPressed(Button.B, function () {
+input.onButtonPressed(Button.AB, function () {
     control.reset()
+})
+// changer la couleur de la DEL
+input.onButtonPressed(Button.B, function () {
+    nombre += 1
+    if (nombre == 1) {
+        pins.digitalWritePin(DigitalPin.P0, 1)
+        pins.digitalWritePin(DigitalPin.P1, 0)
+        pins.digitalWritePin(DigitalPin.P2, 0)
+    } else if (nombre == 2) {
+        pins.digitalWritePin(DigitalPin.P0, 0)
+        pins.digitalWritePin(DigitalPin.P1, 1)
+        pins.digitalWritePin(DigitalPin.P2, 0)
+    } else if (nombre == 3) {
+        pins.digitalWritePin(DigitalPin.P0, 0)
+        pins.digitalWritePin(DigitalPin.P1, 0)
+        pins.digitalWritePin(DigitalPin.P2, 1)
+    } else if (nombre == 4) {
+        pins.digitalWritePin(DigitalPin.P0, 1)
+        pins.digitalWritePin(DigitalPin.P1, 1)
+        pins.digitalWritePin(DigitalPin.P2, 1)
+    } else if (nombre >= 5) {
+        nombre = 0
+        pins.digitalWritePin(DigitalPin.P0, 0)
+        pins.digitalWritePin(DigitalPin.P1, 0)
+        pins.digitalWritePin(DigitalPin.P2, 0)
+    }
 })
 let Moyenne = 0
 let Lecture = 0
 let Compteur = 0
+let nombre = 0
 let Cal = 0
 let Debut = 0
 Debut = 0
-pins.analogWritePin(AnalogPin.P1, 1023)
 basic.forever(function () {
     while (Debut == 0) {
         serial.writeValue("I", input.lightLevel())
