@@ -50,14 +50,14 @@ basic.forever(function () {
     while (Debut == 2) {
         Compteur = 1
         Lecture = input.lightLevel()
-        basic.pause(50)
-        for (let index = 0; index < 49; index++) {
+        basic.pause(20)
+        for (let index = 0; index < 9; index++) {
             Compteur += 1
             Lecture = Math.round(Lecture + input.lightLevel())
-            basic.pause(50)
+            basic.pause(20)
         }
         Moyenne = Lecture / Compteur
-        serial.writeValue("Absorbance", 100 - Math.round(Moyenne * 100 / Cal))
+        serial.writeValue("Absorbance", Math.round((100 - Moyenne * 100 / Cal) * 10) / 10)
         basic.pause(1000)
     }
 })
